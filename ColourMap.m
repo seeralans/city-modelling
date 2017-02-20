@@ -1,5 +1,5 @@
 function [] = ColourMap(WantedVariable)
-
+% edit
 if length(WantedVariable) ~= 3485
     error('Input vector should contain 3485 values')
 end
