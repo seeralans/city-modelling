@@ -1,6 +1,6 @@
 clear;
 
-Cen = LoadData; %Function just loads all the KS data files
+Cen = loadData; %Function just loads all the KS data files
 
 load Coords
 load CoordsCityCouncil
@@ -26,7 +26,7 @@ for i = cenData
 end
 
 
-[IDX C] = kmeans(allData(:,339:341),3);
+[IDX C] = kmeans(allData(:,351:354),3);
 
 for i = 1:3485
     
