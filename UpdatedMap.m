@@ -1,6 +1,6 @@
 clear;
 
-Cen = LoadData(); %Function just loads all the KS data files
+Cen = loadData(); %Function just loads all the KS data files
 
 load Coords
 load CoordsCityCouncil
