@@ -1,0 +1,15 @@
+git git init
+git status
+git add (file)
+git commit - adds snapshot of code
+git diff - difference in versions
+git log - 
+git blame - who edited what
+git checkout
+git clone (link)
+git push
+
+
+git add (file)
+git commit -m "message"
+git push
