@@ -43,6 +43,8 @@ end
 theta = linspace(0, length(coeff), length(coeff) );
 
 plot(theta, latent);
+xlabel('theta')
+ylabel('latent')
 
 [sort_coeff, idx] = sort(abs(coeff), 'descend');
 RS_coeff = zeros(814,814);
