@@ -3,14 +3,22 @@
 load Coords
 load CoordsCityCouncil
 
+%% Options
 % choose cutoff threshold for cutting the hierarchical tree
-cutoff = 3;
+cutoff = 2;
 % choose linkage from:
 % 'average', 'centroid', 'complete', 'median', 'single', 'ward', 'weighted'
-linkageType = 'centroid'; 
-T = clusterdata(score(:,[1 2 3 4 5 6 7 8 9]),'maxclust',cutoff,'linkage', linkageType);
-%find(T==1) 
+% complete seems to be best
+linkageType = 'complete'; 
+% choose the top n most important features found from pca
+n = 20;
+index = ind;
 
+%% Hierarchical clustering
+T = clusterdata(normDataMat(:,index(end-n:end)),'maxclust',cutoff,'linkage', linkageType);
+
+%% Plot map
+figure();
 for i = 1:length(score)
     a = Coords{i}(:,1);
     b = Coords{i}(:,2);
