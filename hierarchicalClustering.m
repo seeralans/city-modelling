@@ -16,7 +16,9 @@ index = ind;
 
 %% Hierarchical clustering
 T = clusterdata(normDataMat(:,index(end-n:end)),'maxclust',cutoff,'linkage', linkageType);
-
+% silhouette to show how crap our clusters are
+figure();
+silhouette(normDataMat(:,index(end-n:end)),T);
 %% Plot map
 figure();
 for i = 1:length(score)
