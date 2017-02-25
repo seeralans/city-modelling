@@ -28,4 +28,13 @@ for i = 1:k
     clusters{i} = score(IDX == i,:);
  
 end
+Class = zeros(3485,1);
+for i = 1:3485
+    
+    if IDX(i) == 1 || IDX(i) == 2
+        Class(i) = 1; %City
+    elseif IDX(i) == 3
+        Class(i) = 0; % Not city
+    end
+end
 
