@@ -1,64 +1,46 @@
-%
-%
- 
-%Data = normDataMat(:,[351,353,354,384]);
-
-Class = zeros(3485,1);
+%% New code, compare neighbouring areas
+function Structure = StructureTest(Class, Coords)
 Dist = zeros(3485,1);
-for i = 1:3485
-    if IDX(i) == 1 || IDX(i) == 2
-    Class(i) = 1; %City
-    
-    elseif IDX(i) == 3
-        Class(i) = 0; % Not city
-    end
+Midpoint = zeros(3485,2);
+for i = 1:3485   
+    Midpoint(i,:) = findCentroid(Coords{i});
 end
-Midpoints = Midpoints; % Waiting for Ben's Code for center of masses 
-Distance_Threshold = 0.0002;
-Neighbough_Threshold = 5;
-
-%% Whos Nearest Who
-
-Neighbours = zeros(3485,3485);
-Neigh_Dist = zeros(3485,3485);
+%% Find distances from every point
+ConnectionMat = zeros(3485,3485);
+DistMat = zeros(3485,3485);
 for i = 1:3485
-    for j = 1:3485
-        Neigh_Dist(i,j) = sqrt((Midpoints(i,1) - Midpoints(j,1))^2 + (Midpoints(i,2) - Midpoints(j,2))^2);
-    end
+    for j = i:3485
+        DistMat(i,j) = sqrt((Midpoint(i,1)-Midpoint(j,1))^2 + (Midpoint(i,2)-Midpoint(j,2))^2);
+        DistMat(j,i) = DistMat(i,j);
+    end   
 end
+[ SortDistMat, DistIndex] = sort(DistMat);
 
-[Neigh_Dist2, Dist_Ind] = sort(Neigh_Dist);
-
-
-
-
-%%  Test for the class of the areas surrounding a point
-Neigh_Class = zeros(3485,1);
+%% Create connection matrix
 for i = 1:3485
-    
-    V = zeros(Neighbough_Threshold,1);
-    for j = 1:K
-        V(j) = Class(Dist_Ind(i,j));
+    v = [ Coords{i}(:,1) Coords{i}(:,2)];
+    x = 0;
+    for j = 1:10
+        u = [ Coords{DistIndex(j,i)}(:,1) Coords{DistIndex(j,i)}(:,2)];
+        x = isempty(intersect(v,u));
+        ConnectionMat(i,DistIndex(j,i)) = 1 - x;
     end
-    
-    if sum(V) >= K/2
-    
-        Neigh_Class(i) = 1;
+    v = [];
+    u = [];
+end
+%% Test Classes
+NearClass = zeros(3485,1);
+for i = 3485
+    v = find(ConnectionMat(:,i));
+    if (sum(Class(v))/length(v)) >= 0.5
+        NearClass(i) = 1;
     else
-        Neigh_Class(i) = 0;
+        NearClass(i) = 0;
     end
-    
 end
 
-
-Error = sum(Class - Neigh_Class);
-
-
-
-
-
-
-
+Structure = sum(Class - NearClass)/length(Class);
+return
 
 
 
