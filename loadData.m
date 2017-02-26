@@ -3,7 +3,7 @@ function cen = loadData()
 % For consistency sake keep the current directory structure
 
 	% change this line to load different data
-	fileList = dir('Data/Data/Reduced_Census/Census/ks*');
+	fileList = dir('Data/Data/Reduced_Census/Census/qs*');
 
 
 	for i = 1:length(fileList)
