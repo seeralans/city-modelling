@@ -5,7 +5,7 @@ load CoordsCityCouncil
 
 %% Options
 % choose cutoff threshold for cutting the hierarchical tree
-cutoff = 2;
+cutoff = 3;
 % choose linkage from:
 % 'average', 'centroid', 'complete', 'median', 'single', 'ward', 'weighted'
 % complete seems to be best
@@ -16,21 +16,35 @@ index = ind;
 
 %% Hierarchical clustering
 T = clusterdata(normDataMat(:,index(end-n:end)),'maxclust',cutoff,'linkage', linkageType);
-% silhouette to show how crap our clusters are
+
+%% Plot silhouette to show how crap our clusters are
 figure();
 silhouette(normDataMat(:,index(end-n:end)),T);
+
 %% Plot map
 figure();
-for i = 1:length(score)
+Class = zeros(height,1);
+for i = 1:height
+
+    if T(i) == 1
+        Class(i) = 0; %City
+    elseif T(i) == 2 || T(i) == 3
+        Class(i) = 1; % Not city
+    end
+end
+
+for i = 1:height
+
     a = Coords{i}(:,1);
     b = Coords{i}(:,2);
-    if T(i) == 1
-        col = 1;
-    elseif T(i) == 2
-        col = 0.5;
-    else 
-        col = 0;
+    if Class(i) == 0
+        col = [0.66 0.66 0.66];
+    elseif Class(i) == 1
+        col = [1 1 1];
     end
-    patch(a,b,[T(i)/cutoff 1 T(i)/cutoff])
+    
+    patch(a,b,col)
     hold on
 end
+hold off;
+
