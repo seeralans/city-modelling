@@ -3,7 +3,7 @@
 % fuck with it please.
 %
 %
-
+load Coords
 k = 3; % no. of clusters
 [clusterIDX, ~] = kmeans(normDataMat(:,[351 353 354 384]),k,'Start',[1 0 0 0;0 1 0 0; 0 0 1 0]);
 for i = 1:k
@@ -15,9 +15,9 @@ Class = zeros(3485,1);
 for i = 1:3485
 
     if clusterIDX(i) == 1 
-        Class(i) = 0; %City
+        Class(i) = 0; %Not City
     elseif clusterIDX(i) == 3 || clusterIDX(i) == 2
-        Class(i) = 1; % Not city
+        Class(i) = 1; % City
     end
 end
 
