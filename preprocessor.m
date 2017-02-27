@@ -57,7 +57,7 @@ end
 T = sum(abs(RS_coeff), 2);
 [sort_T, ind] = sort(T);
 
-clear diff height i width xMax xMin normDataMat cen T
+clear diff height i width xMax xMin dataMat cen T
 % test = zeros(814, 2);
 %
 % idx2(1,1)
