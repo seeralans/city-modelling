@@ -59,5 +59,7 @@ for i = 1:Num
 end
 load ('CoordsCityCouncil.mat')
 plot(Coords2(:,1),Coords2(:,2),'y--','LineWidth',1.5)
+
+Clear Num IsBorder Borders count count2 i j k col a b v ai bi BorderCoords
         
             
