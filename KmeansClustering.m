@@ -25,19 +25,12 @@ for i = 1:length(score)
 
     a = Coords{i}(:,1);
     b = Coords{i}(:,2);
-    % if clusterIDX(i) == 1
-    %     col = [1 1 1];
-
-    % elseif clusterIDX(i) == 2
-    %     col = [1 - 1/k, 1 - 1/k, 1- 1/k];
-
-    % elseif clusterIDX(i) == 2
-    %     col = [1 - 1/k, 1 - 1/k, 1- 1/k];
-    % else
-    %     col = [0.33 0.33 0.33];
-    % end
-    j = Class(i);
-    col = [j, j, j];
+    if Class(i) == 1
+        col = [0.66 0.66 0.66];
+    elseif Class(i) == 0
+            col = [1 1 1];
+    end
+    
     patch(a,b,col)
     hold on
 end
