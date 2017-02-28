@@ -16,6 +16,7 @@ if length(unique(Class)) == 2
         v = find(ConnectionMat(:,i));
         NearClass(i) = (sum(Class(v))/length(v));
     end
+    NearClass(isnan(NearClass)) = 0;
     Structure = sum(sum((NearClass - Class).^2))/length(Class); % Mean sqrd error
 elseif length(unique(Class)) > 2
     NearClass = zeros(numPoints,length(unique(Class)));
