@@ -1,7 +1,7 @@
 load Coords
 load CoordsCityCouncil
 
-[clusterIDX, ~] = kmeans(eigVec, k);
+% [clusterIDX, ~] = kmeans(eigVec, k);
 figure('Name', 'Main Map');
 for i = 1:length(score)
 
