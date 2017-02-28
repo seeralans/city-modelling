@@ -1,7 +1,7 @@
 % run preprocessor.m before running this script
 % eg command window entry: hierarchicalClustering(normDataMat(:,ind(end-20:end)),4)
 
-function [clusterIDX, reclusterIDX] = hierarchicalClustering(data, numClusters)
+function [clusterIDX, reclusterIDX, Class] = hierarchicalClustering(data, numClusters)
 
 load Coords
 [height, ~] = size(data);
@@ -25,6 +25,7 @@ Class = zeros(height,1);
 for i = 1:height
     Class(i) = reclusterIDX(clusterIDX(i));
 end
+Class =  Class - 1 ;
 
 %% Plot silhouette to show how crap our clusters are
 figure();
@@ -38,7 +39,7 @@ for i = 1:height
     if Class(i) == 1
         patch(a,b,[0.66 0.66 0.66])
         hold on
-    elseif Class(i) == 2
+    else
         patch(a,b,[1 1 1])
         hold on
     end
