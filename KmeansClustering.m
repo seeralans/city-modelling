@@ -3,24 +3,22 @@
 % fuck with it please.
 %
 %
-
-k = 3; % no. of clusters
-[clusterIDX, ~] = kmeans(normDataMat(:,[351 353 354 384]),k,'Start',[1 0 0 0;0 1 0 0; 0 0 1 0]);
+load Coords
+k = 30; % no. of clusters
+[clusterIDX, Centriods] = kmeans(normDataMat(:,[351 353 354 384]),k);
 for i = 1:k
 
     clusters{i} = score(clusterIDX == i,:);
 
 end
 Class = zeros(3485,1);
-for i = 1:3485
-
-    if clusterIDX(i) == 1 
-        Class(i) = 0; %City
-    elseif clusterIDX(i) == 3 || clusterIDX(i) == 2
-        Class(i) = 1; % Not city
-    end
+k2 = 2; % no. of classes
+[reclusterIDX,~] = kmeans(Centriods,k2,'Start',[1 0 0 0;0 0 1 0]);
+for i = 1:numPoints  
+    Class(i) = reclusterIDX(clusterIDX(i));
 end
-
+Class =  Class - 1 ;
+figure('Name','Map - Kmeans')
 for i = 1:length(score)
 
     a = Coords{i}(:,1);
@@ -35,3 +33,5 @@ for i = 1:length(score)
     hold on
 end
 hold off;
+
+Structure = StructureTest(Class, Coords, ConnectionMat)
