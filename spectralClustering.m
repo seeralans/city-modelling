@@ -1,8 +1,9 @@
 % Spectral Clustering Script
-[height, width] = size(score(:, 1:150))
+function [clusterIDX, clusterCentroids] = spectralClustering(data, numClusters, numConnection)
 
-numConnection = 50;
-[knnIDX, distMatrix] = knnsearch(score(:, 1:150), score(:, 1:150), 'K', numConnection);
+[height, width] = size(data)
+
+[knnIDX, distMatrix] = knnsearch(data, data, 'K', numConnection);
 
 lapMatrix = zeros(height, height);
 
@@ -26,23 +27,25 @@ end
 
 
 % [eigVec, eigVal] = eig(lapMatrix);
-[eigVec, eigVal] = eigs(lapMatrix, 200, eps);
+[eigVec, eigVal] = eigs(lapMatrix, numClusters, eps);
 %%
-eigVal = sort(eigVal);
+% eigVal = sort(eigVal);
 
-eigVal = eigVal(end, :);
-eigVal = sort(eigVal);
-test = linspace(1, length(eigVal), length(eigVal));
+% eigVal = eigVal(end, :);
+% eigVal = sort(eigVal);
+% test = linspace(1, length(eigVal), length(eigVal));
 
-figure('Name', 'Eigenvalue Spectrum');
-plot(test, eigVal)
-hold off;
+% figure('Name', 'Eigenvalue Spectrum');
+% plot(test, eigVal)
+% hold off;
 
-numClusters = 10;
 [clusterIDX, centroids] = kmeans(eigVec, numClusters);
-[clusterIDX, ~] = kmeans(centroids, 3);
-s = silhouette(score(:, 1:10), clusterIDX );
 
-mean(s)
+% [clusterIDX, ~] = kmeans(centroids, 3);
+
+% s = silhouette(data, clusterIDX );
+
+% mean(s)
 
 
+end
