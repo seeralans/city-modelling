@@ -56,4 +56,7 @@ MinDistJNorm(isnan(MinDistJNorm)) = 0;
 MinDistBNorm(isnan(MinDistBNorm)) = 0;
 MinDistDNorm(isnan(MinDistDNorm)) = 0;
 MinDistEANorm(isnan(MinDistEANorm)) = 0;
+clear DistB MinDistB DistD MinDistD DistEA MinDistEA DistJ MinDistJ 
+
+
 
