@@ -47,7 +47,7 @@ xlabel('theta')
 ylabel('latent')
 
 [sort_coeff, idx] = sort(abs(coeff), 'descend');
-RS_coeff = zeros(814,814);
+RS_coeff = zeros(width,width);
 for i = 1:length(latent)
     RS_coeff(:,i) = latent(i)*coeff(:,i);
 end
@@ -57,7 +57,10 @@ end
 T = sum(abs(RS_coeff), 2);
 [sort_T, ind] = sort(T);
 
-clear diff height i width xMax xMin dataMat cen T
+PopDensity = dataMat(:,1)./dataMat(:,7);
+normPopDensity = (PopDensity - min(PopDensity))/(max(PopDensity) - min(PopDensity));
+
+clear diff height i width xMax xMin cen T dataMat
 % test = zeros(814, 2);
 %
 % idx2(1,1)
