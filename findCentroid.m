@@ -1,4 +1,4 @@
-function [Cx, Cy] = findCentroid(A)
+function C = findCentroid(A)
 Area = polyarea(A(:,1),A(:,2));
 Cx = 0;
 Cy = 0;
@@ -8,7 +8,8 @@ for i = 1:length(A)-1
 end
 Cx = -Cx/(Area*6);
 Cy = -Cy/(Area*6);
-scatter(Cx,Cy)
+C = [Cx, Cy];
+%scatter(Cx,Cy)
 return
     
     
