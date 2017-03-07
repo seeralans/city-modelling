@@ -4,31 +4,35 @@
 %
 %
 load Coords
-k = 30; % no. of clusters
-[clusterIDX, Centriods] = kmeans(normDataMat(:,[351 353 354 384]),k);
+load ConnectionMat
+numPoints = 3485;
+k = 7; % no. of clusters
+[clusterIDX, Centriods] = kmeans(score(:,1:150),k); % [MinDistJNorm MinDistBNorm MinDistDNorm MinDistEANorm MinDistBikeNorm MinDistBarsNorm MinDistTNorm]
 for i = 1:k
 
     clusters{i} = score(clusterIDX == i,:);
 
 end
-Class = zeros(3485,1);
-k2 = 2; % no. of classes
-[reclusterIDX,~] = kmeans(Centriods,k2,'Start',[1 0 0 0;0 0 1 0]);
+Class = zeros(numPoints,1);
+k2 = 7; % no. of classes
+[reclusterIDX,~] = kmeans(Centriods,k2);
 for i = 1:numPoints  
     Class(i) = reclusterIDX(clusterIDX(i));
 end
-Class =  Class - 1 ;
+
 figure('Name','Map - Kmeans')
 for i = 1:length(score)
 
     a = Coords{i}(:,1);
     b = Coords{i}(:,2);
-    if Class(i) == 1
-        col = [0.66 0.66 0.66];
-    elseif Class(i) == 0
-            col = [1 1 1];
-    end
+%     if Class(i) == 1
+%         col = [0.66 0.66 0.66];
+%     elseif Class(i) == 0
+%             col = [1 1 1];
+%     end
     
+    j = Class(i)/k2;
+    col = [j j j];
     patch(a,b,col)
     hold on
 end
