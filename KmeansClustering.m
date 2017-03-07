@@ -4,7 +4,7 @@
 %
 %
 load Coords
-load ConnectionMat
+%load ConnectionMat
 numPoints = 3485;
 k = 7; % no. of clusters
 [clusterIDX, Centriods] = kmeans(score(:,1:150),k); % [MinDistJNorm MinDistBNorm MinDistDNorm MinDistEANorm MinDistBikeNorm MinDistBarsNorm MinDistTNorm]
@@ -19,8 +19,11 @@ k2 = 7; % no. of classes
 for i = 1:numPoints  
     Class(i) = reclusterIDX(clusterIDX(i));
 end
-
-figure('Name','Map - Kmeans')
+FigHandle = figure('Position', [100, 100, 800, 600],'Name','Map - Kmeans');
+set(gca,'fontsize',10)
+xlabel('latitude')
+ylabel('longnitude')
+title('Using PCA and Kmeans to cluster output areas')
 for i = 1:length(score)
 
     a = Coords{i}(:,1);
