@@ -19,6 +19,10 @@ k2 = 7; % no. of classes
 for i = 1:numPoints  
     Class(i) = reclusterIDX(clusterIDX(i));
 end
+
+figure();
+silhouette(score(:,1:150),clusterIDX);
+
 FigHandle = figure('Position', [100, 100, 800, 600],'Name','Map - Kmeans');
 set(gca,'fontsize',10)
 xlabel('latitude')
