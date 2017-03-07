@@ -1,8 +1,8 @@
 load Coords
 load CoordsCityCouncil
-
-% [clusterIDX, ~] = kmeans(eigVec, k);
-figure('Name', 'Main Map');
+k = 7
+[clusterIDX, ~] = kmeans(data, k);
+% figure('Name', 'Main Map');
 for i = 1:length(score)
 
     a = Coords{i}(:,1);
@@ -23,6 +23,8 @@ for i = 1:length(score)
     patch(a,b,col)
     hold on
 end
-hold off;
+%scatter(local(:,1), local(:, 2), 'ro', 'filled');
+
+hold on;
 %Uncomment this to plot bristol city council border
 %plot(CoordsCityCouncil(:,1),CoordsCityCouncil(:,2),'b','linewidth',3)
