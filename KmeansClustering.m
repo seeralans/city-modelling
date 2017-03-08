@@ -4,7 +4,7 @@
 %
 %
 load Coords
-%load ConnectionMat
+load ConnectionMat
 numPoints = 3485;
 k = 7; % no. of clusters
 [clusterIDX, Centriods] = kmeans(score(:,1:150),k); % [MinDistJNorm MinDistBNorm MinDistDNorm MinDistEANorm MinDistBikeNorm MinDistBarsNorm MinDistTNorm]
@@ -22,6 +22,8 @@ end
 
 figure();
 silhouette(score(:,1:150),clusterIDX);
+s = silhouette(score(:,1:150),clusterIDX);
+meanSil = mean(s)
 
 FigHandle = figure('Position', [100, 100, 800, 600],'Name','Map - Kmeans');
 set(gca,'fontsize',10)
