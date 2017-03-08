@@ -14,15 +14,15 @@ for i = 1:k
 
 end
 Class = zeros(numPoints,1);
-k2 = 2; % no. of classes
+k2 = 7; % no. of classes
 [reclusterIDX,~] = kmeans(Centriods,k2);
 for i = 1:numPoints  
     Class(i) = reclusterIDX(clusterIDX(i));
 end
 
 figure();
-silhouette(score(:,1:150),reclusterIDX);
-s = silhouette(score(:,1:150),reclusterIDX);
+silhouette(score(:,1:150),Class);
+s = silhouette(score(:,1:150),Class);
 meanSil = mean(s)
 
 FigHandle = figure('Position', [100, 100, 800, 600],'Name','Map - Kmeans');
