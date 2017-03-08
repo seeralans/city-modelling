@@ -1,7 +1,7 @@
 % run preprocessor.m before running this script
-% run with [clusterIDX, Class, Structure] = hierarchicalClustering(score(:,1:150),6)
+% run with [clusterIDX, Class, meanSil, Structure] = hierarchicalClustering(score(:,1:150),3);
 
-function [clusterIDX, Class, Structure] = hierarchicalClustering(data, numClusters)
+function [clusterIDX, Class, meanSil, Structure] = hierarchicalClustering(data, numClusters)
 
 load Coords
 load ConnectionMat
@@ -20,10 +20,13 @@ Class = zeros(height,1);
 for i = 1:height
     Class(i) = clusterIDX(i);
 end
+Structure = StructureTest(Class, Coords, ConnectionMat);
 
 %% Plot silhouette to show how crap our clusters are
 figure();
 silhouette(data,clusterIDX);
+s=silhouette(data,clusterIDX);
+meanSil = mean(s);
 
 %% Plot map
 FigHandle = figure('Position', [100, 100, 800, 600],'Name','Map - Hierarchical');
@@ -42,5 +45,8 @@ for i = 1:height
 end
 hold off;
 
-Structure = StructureTest(Class, Coords, ConnectionMat)
+%% Plot dendrogram
+tree = linkage(data,'complete');
+figure();
+dendrogram(tree,0);
 end
