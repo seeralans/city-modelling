@@ -1,7 +1,8 @@
 load Coords
 load CoordsCityCouncil
-k = 7
+k = 7;
 [clusterIDX, ~] = kmeans(data, k);
+class = clusterIDX;
 % figure('Name', 'Main Map');
 for i = 1:length(score)
 
