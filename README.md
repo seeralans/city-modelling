@@ -1,6 +1,6 @@
-#City Modelling 
+# City Modelling 
 
-###Using the 2011 UK census data can we formulate an emprical modells that identify cities and areas within cities?
+### Using the 2011 UK census data can we formulate an emprical modells that identify cities and areas within cities?
 
 The aims of the project are:
 - Develop automated methods of finding the boundary of a city.
@@ -13,4 +13,4 @@ The aims of the project are:
 - Identify and compare parameters that subdivide the city to the parameters
 	that are used for the clasification of a city.
 
-##Contributors: Liam Bothwell, Ben Menzies, Seeralan Sarvaharman, Ben Tambling
+## Contributors: Liam Bothwell, Ben Menzies, Seeralan Sarvaharman, Ben Tambling
